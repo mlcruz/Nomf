@@ -6,27 +6,32 @@ open Fable.React
 open Fable.React.Props
 
 // MODEL
-type Model = int
+type Model = {isAlertOpen : bool ; alertText : string}
 
 type Msg =
-| Increment
-| Decrement
+| HappyAlert
+| SadAlert
 
-let init() : Model = 0
+let init() : Model = {isAlertOpen = false ; alertText = ""}
 
 // UPDATE
 let update (msg:Msg) (model:Model) =
     match msg with
-    | Increment -> model + 1
-    | Decrement -> model - 1
+    | HappyAlert ->
+        Fable.Core.JS.eval("alert(':)')") |> ignore
+        {isAlertOpen = true; alertText = ":)"}
+    | SadAlert -> 
+        Fable.Core.JS.eval("alert(':(')") |> ignore
+        {isAlertOpen = true; alertText = ":("}
 
 // VIEW (rendered with React)
 let view (model:Model) dispatch =
-
   div []
-      [ button [ OnClick (fun _ -> dispatch Increment) ] [ str "+" ]
-        div [] [ str (string model) ]
-        button [ OnClick (fun _ -> dispatch Decrement) ] [ str "-" ] ]
+    [
+        textarea [Style [Border "1px solid red"] ] []
+        br []
+        button [Style [Height 20; Width 50] ; OnClick (fun _ -> dispatch HappyAlert) ] [str model.alertText]
+    ]
 
 // App
 Program.mkSimple init update view
