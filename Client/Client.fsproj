@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="deploy\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="package.json" />
+    <None Include="Nuget.Config" />
+    <None Include="webpack.config.js" />
+    <Content Include="src\style.css" />
+    <Content Include="src\fable.ico" />
+    <Content Include="src\index.html" />
+    <Compile Include="App.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="public\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Fable.Core" Version="3.0.0" />
+    <PackageReference Include="Fable.Elmish.React" Version="3.0.1" />
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="yarn&#xD;&#xA;yarn run webpack" />
+  </Target>
+
+</Project>
