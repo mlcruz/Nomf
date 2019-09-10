@@ -29,7 +29,11 @@
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="yarn&#xD;&#xA;yarn run webpack" />
+    <Exec Command="yarn" />
+  </Target>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if $(ConfigurationName) == Release yarn run webpack" />
   </Target>
 
 </Project>
