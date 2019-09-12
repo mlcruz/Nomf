@@ -1,6 +1,7 @@
 ﻿open System
 open System.Threading
 open Suave
+open LogWatcher
 
 type SubprocessResult = {
     exitCode : int
@@ -22,10 +23,13 @@ let main argv =
   //let listening, server = startWebServerAsync conf (Successful.OK "Hello World")
     
   //Async.Start(server, cts.Token)
+  //let logWatcher = LogWatcher(@"D:\git\test.txt")
+  //Async.Start <| logWatcher.Start() 
   //printfn "Make requests now"
   //Console.ReadKey true |> ignore
   //cts.Cancel()
 
   Console.WriteLine(Environment.CurrentDirectory)
+  
  
   0 // return an integer exit code

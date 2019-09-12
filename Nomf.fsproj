@@ -14,6 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="CommonLibrary.fs" />
+    <Compile Include="Watcher\Watcher.fs" />
+    <Compile Include="Watcher\AsyncFileWatcher.fs" />
+    <Compile Include="Watcher\LogWatcher.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
